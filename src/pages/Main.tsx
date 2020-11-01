@@ -1,5 +1,6 @@
 import React from "react";
 import StyledForm from "../components/AuthForm/AuthForm.styled";
+import Logo from "../components/Logo/Logo";
 import config from "../config";
 
 const Main: React.FC = () => {
@@ -7,9 +8,7 @@ const Main: React.FC = () => {
     <>
       <StyledForm>
         <form>
-          <h1 className="text-xl font-bold mb-8 text-blue-900">
-            ⚽ Matchlytics ⚽️
-          </h1>
+          <Logo />
           <input type="text" placeholder="Full name" />
           <input type="text" placeholder="Email" />
           <input type="text" placeholder="Password" />
