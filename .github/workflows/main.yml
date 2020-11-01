@@ -8,18 +8,14 @@ jobs:
     name: Run ESLint
     runs-on: ubuntu-latest
     steps:
-      
-      # Check out the repository
       - uses: actions/checkout@v1
-
-      # Install Node.js
-      - uses: actions/setup-node@v1
+      - name: Use Node.js 14
+        uses: actions/setup-node@v1
         with:
-          node-version: 12
-      - run: rm -f .yarnclean
-      - run: yarn --frozen-lockfile --ignore-engines --ignore-optional --no-bin-links --non-interactive --silent --ignore-scripts --production=false
+          node_version: 14
 
-      - uses: tinovyatkin/action-eslint@v1
-        with:
-          repo-token: ${{secrets.GITHUB_TOKEN}}
-          check-name: eslint
+      - name: Run CI
+        run: |
+          yarn install
+          yarn linter
+          yarn build
