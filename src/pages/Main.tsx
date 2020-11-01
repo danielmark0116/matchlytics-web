@@ -1,7 +1,7 @@
 import React from "react";
 import StyledForm from "../components/AuthForm/AuthForm.styled";
 
-const Main = () => {
+const Main: React.FC = () => {
   return (
     <>
       <StyledForm>

@@ -1,12 +1,12 @@
 import React from "react";
 import Main from "./pages/Main";
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
       <Main />
     </>
   );
-}
+};
 
 export default App;
