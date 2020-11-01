@@ -24,4 +24,4 @@ const Main: React.FC = () => {
   );
 };
 
-export default Main;
+export default Main
