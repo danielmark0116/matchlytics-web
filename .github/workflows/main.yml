@@ -4,7 +4,7 @@ on:
   - pull_request
 
 jobs:
-  build:
+  eslint:
     name: Run ESLint
     runs-on: ubuntu-latest
     steps:
@@ -16,9 +16,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - run: rm -f .yarnclean
+      - run: yarn --frozen-lockfile --ignore-engines --ignore-optional --no-bin-links --non-interactive --silent --ignore-scripts --production=false
 
-      # Install your dependencies
-      - run: npm install
-
-      # Run ESLint
-      - uses: eslint/github-action@v0
+      - uses: tinovyatkin/action-eslint@v1
+        with:
+          check-name: eslint
