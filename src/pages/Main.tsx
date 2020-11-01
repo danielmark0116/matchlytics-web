@@ -1,5 +1,6 @@
 import React from "react";
 import StyledForm from "../components/AuthForm/AuthForm.styled";
+import config from "../config";
 
 const Main: React.FC = () => {
   return (
@@ -14,10 +15,7 @@ const Main: React.FC = () => {
           <input type="text" placeholder="Password" />
           <button disabled>Sign In</button>
           <br />
-          <a
-            href="https://matchlytics.danielgrychtol.com/auth/google"
-            rel="no-opener no-refferer"
-          >
+          <a href={config.googleOAuth} rel="no-opener no-refferer">
             <button type="button">Login with Google</button>
           </a>
         </form>
