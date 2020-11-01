@@ -17,8 +17,11 @@ jobs:
         with:
           node-version: 12
 
+      # Add yarn
+      - uses: comchangs/action-yarn@v0.1-beta
+
       # Install your dependencies
-      - run: npm ci
+      - run: yarn install
 
       # Run ESLint
       - uses: eslint/github-action@v0
