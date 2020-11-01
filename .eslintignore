@@ -1,2 +1,3 @@
 src/assets/**/*
+*.css
 src/tailwind.config.js
