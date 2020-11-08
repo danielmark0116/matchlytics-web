@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import AuthContext from "../contexts/AuthContext";
+import AuthContext, { AuthContextData } from "../contexts/AuthContext";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const useAuth = () => {
+export const useAuthContext = (): AuthContextData => {
   const authContext = useContext(AuthContext);
 
   if (authContext === null) {
