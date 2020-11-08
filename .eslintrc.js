@@ -21,5 +21,15 @@ module.exports = {
   rules: {
     semi: ["error", "always"],
     quotes: ["error", "double"],
+    "react/prop-types": [2, { ignore: ["children"] }],
+  },
+  settings: {
+    react: {
+      createClass: "createReactClass",
+      pragma: "React",
+      fragment: "Fragment",
+      version: "detect",
+      flowVersion: "0.53",
+    },
   },
 };
