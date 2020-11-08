@@ -42,6 +42,8 @@ const AuthProvider: React.FC = ({ children }) => {
 
       delete user.password_hash;
 
+      console.log("Got the user! " + user.email);
+
       setAccessToken(accessToken);
       saveToLocalStorage(LocalStorageKeys.ACCESS_TOKEN, accessToken);
       return Promise.resolve(user);
