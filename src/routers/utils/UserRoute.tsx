@@ -13,7 +13,7 @@ any) => {
     <Route
       {...rest}
       render={(props) =>
-        user ? <Component {...props} /> : <Redirect to="/login" />
+        user ? <Component {...props} /> : <Redirect to="/unauthorized" />
       }
     />
   );

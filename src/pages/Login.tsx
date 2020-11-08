@@ -10,7 +10,7 @@ const Login: React.FC = () => {
 
   return (
     <>
-      {user ? <Redirect to="" /> : null}
+      {user ? <Redirect to="/" /> : null}
       <StyledForm>
         <form>
           <Logo />

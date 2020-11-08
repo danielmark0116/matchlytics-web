@@ -15,7 +15,7 @@ any) => {
     <Route
       {...rest}
       render={(props) =>
-        condition ? <Component {...props} /> : <Redirect to="/login" />
+        condition ? <Component {...props} /> : <Redirect to="/unauthorized" />
       }
     />
   );
