@@ -6,17 +6,20 @@ import OAuthRedirect from "../pages/OAuthRedirect";
 import Login from "../pages/Login";
 import MemberRoute from "./utils/MemberRoute";
 import Unauthorized from "../pages/Unauthorized";
+import Layout from "../layout/Layout";
 
 const App: React.FC = () => {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/oauth_redirect" component={OAuthRedirect} />
-        <MemberRoute exact path="/" component={Main} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/unauthorized" component={Unauthorized} />
-        <Route component={NotFound} />
-      </Switch>
+      <Layout>
+        <Switch>
+          <Route exact path="/oauth_redirect" component={OAuthRedirect} />
+          <MemberRoute exact path="/" component={Main} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/unauthorized" component={Unauthorized} />
+          <Route component={NotFound} />
+        </Switch>
+      </Layout>
     </Router>
   );
 };

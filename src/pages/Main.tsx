@@ -3,7 +3,7 @@ import React from "react";
 const Main: React.FC = () => {
   return (
     <>
-      <h1>app asdasd</h1>
+      <h1>app dashboard</h1>
     </>
   );
 };

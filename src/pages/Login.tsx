@@ -14,9 +14,9 @@ const Login: React.FC = () => {
       <StyledForm>
         <form>
           <Logo />
-          <input type="text" placeholder="Full name" />
-          <input type="text" placeholder="Email" />
-          <input type="text" placeholder="Password" />
+          <input disabled type="text" placeholder="Full name" />
+          <input disabled type="text" placeholder="Email" />
+          <input disabled type="text" placeholder="Password" />
           <button disabled>Sign In</button>
           <br />
           <a href={config.googleOAuth} rel="no-opener no-refferer">

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Unauthorized = () => {
+const Unauthorized: React.FC = () => {
   return <div>Unauthorized</div>;
 };
 
