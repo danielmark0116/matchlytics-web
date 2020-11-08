@@ -21,7 +21,7 @@ module.exports = {
   rules: {
     semi: ["error", "always"],
     quotes: ["error", "double"],
-    "react/prop-types": [2, { ignore: ["children"] }],
+    "react/prop-types": 0,
   },
   settings: {
     react: {

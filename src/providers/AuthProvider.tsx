@@ -56,6 +56,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const logout = useCallback(() => {
     setAccessToken("");
+    saveToLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
     setUser(null);
   }, []);
 
