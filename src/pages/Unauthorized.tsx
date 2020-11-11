@@ -1,7 +1,7 @@
 import React from "react";
 
 const Unauthorized: React.FC = () => {
-  return <div>Unauthorized</div>;
+  return <p>Unauthorized</p>;
 };
 
 export default Unauthorized;

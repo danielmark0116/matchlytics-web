@@ -7,6 +7,8 @@ import Login from "../pages/Login";
 import MemberRoute from "./utils/MemberRoute";
 import Unauthorized from "../pages/Unauthorized";
 import Layout from "../layout/Layout";
+import AdminRoute from "./utils/AdminRoute";
+import BotControl from "../pages/BotControl";
 
 const App: React.FC = () => {
   return (
@@ -16,6 +18,7 @@ const App: React.FC = () => {
           <Route exact path="/oauth_redirect" component={OAuthRedirect} />
           <MemberRoute exact path="/" component={Main} />
           <Route exact path="/login" component={Login} />
+          <AdminRoute exact path="/bot" component={BotControl} />
           <Route exact path="/unauthorized" component={Unauthorized} />
           <Route component={NotFound} />
         </Switch>

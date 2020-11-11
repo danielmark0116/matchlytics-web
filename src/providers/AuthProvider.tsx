@@ -4,6 +4,7 @@ import { User, UserRoles } from "../types/user";
 import config from "../config";
 import axios from "axios";
 import { LocalStorageKeys, useLocalStorage } from "../hooks/useLocalStorage";
+import { updateToken } from "../utils/axios";
 
 const API = config.apiBase;
 
@@ -19,14 +20,10 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const getUser = useCallback(async (accessToken: string): Promise<User> => {
     try {
+      updateToken(accessToken);
+
       const user: UserWithHash =
-        (
-          await axios.get(API + "/api/users", {
-            headers: {
-              authorization: `Bearer ${accessToken}`,
-            },
-          })
-        ).data?.user ?? null;
+        (await axios.get(API + "/api/users")).data?.user ?? null;
 
       if (!user) {
         throw new Error("No user");
@@ -41,8 +38,6 @@ const AuthProvider: React.FC = ({ children }) => {
       });
 
       delete user.password_hash;
-
-      console.log("Got the user! " + user.email);
 
       setAccessToken(accessToken);
       saveToLocalStorage(LocalStorageKeys.ACCESS_TOKEN, accessToken);
@@ -74,9 +69,12 @@ const AuthProvider: React.FC = ({ children }) => {
   );
 
   useEffect(() => {
-    const token = getFromLocalStorage(LocalStorageKeys.ACCESS_TOKEN);
+    const tokenFromStorage = getFromLocalStorage(LocalStorageKeys.ACCESS_TOKEN);
+    const token = typeof tokenFromStorage === "string" ? tokenFromStorage : "";
 
-    getUser(typeof token === "string" ? token : "");
+    if (token) {
+      getUser(typeof token === "string" ? token : "");
+    }
   }, [getFromLocalStorage, getUser]);
 
   return (
