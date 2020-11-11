@@ -3,7 +3,7 @@ import tw from "twin.macro";
 
 const StyledLayout = styled.main.attrs({
   className:
-    "flex flex-col min-h-screen w-screen justify-center items-center bg-gray-400 relative pt-8",
+    "flex flex-col min-h-screen w-screen items-center bg-gray-400 relative pt-24",
 })`
   & {
     nav {
