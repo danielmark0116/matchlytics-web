@@ -1,6 +1,7 @@
 import React from "react";
-import { Route, Redirect, RouteProps } from "react-router-dom";
+import { Redirect, Route, RouteProps } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuth";
+import Unauthorized from "../../pages/Unauthorized";
 
 const SuperAdminRoute: React.FC<RouteProps> = ({
   component: Component,
@@ -15,7 +16,14 @@ any) => {
     <Route
       {...rest}
       render={(props) =>
-        condition ? <Component {...props} /> : <Redirect to="/unauthorized" />
+        condition ? (
+          <Component {...props} />
+        ) : (
+          <>
+            {!user ? <Redirect to="login" /> : null}
+            <Unauthorized />
+          </>
+        )
       }
     />
   );
