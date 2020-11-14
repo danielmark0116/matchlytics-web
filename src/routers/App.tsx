@@ -9,6 +9,7 @@ import Unauthorized from "../pages/Unauthorized";
 import Layout from "../layout/Layout";
 import AdminRoute from "./utils/AdminRoute";
 import BotControl from "../pages/BotControl";
+import Users from "../pages/Users";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
           <MemberRoute exact path="/" component={Main} />
           <Route exact path="/login" component={Login} />
           <AdminRoute exact path="/bot" component={BotControl} />
+          <AdminRoute exact path="/users" component={Users} />
           <Route exact path="/unauthorized" component={Unauthorized} />
           <Route component={NotFound} />
         </Switch>
