@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink onClick={closeMenu} to="/">
+            <NavLink onClick={closeMenu} to="/users">
               Uzytkownicy
             </NavLink>
           </li>
