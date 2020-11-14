@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useAuthContext } from "../../hooks/useAuth";
 import useClickOutside from "../../hooks/useClickOutside";
 import { User, UserRoles } from "../../types/user";
 import { Button } from "../Button/Button.styled";
@@ -16,6 +17,7 @@ interface Props {
 }
 
 const UserBlob: React.FC<Props> = ({ user, onRoleChangeClick }) => {
+  const { user: currentUser } = useAuthContext();
   const menuRef = useRef<HTMLDivElement>(null);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -25,7 +27,15 @@ const UserBlob: React.FC<Props> = ({ user, onRoleChangeClick }) => {
     <UserBlobContainer>
       <UserBlobHeader>
         <UserBlobHeaderTitle>
-          <Text>{user.email}</Text>
+          <Text>
+            <span
+              className={
+                currentUser?.id === user.id ? "text-red-800 font-bold" : ""
+              }
+            >
+              {user.email}
+            </span>
+          </Text>
           <Text light small>
             <span className="text-teal-700 font-bold">
               {user.role.toUpperCase()}
@@ -33,21 +43,23 @@ const UserBlob: React.FC<Props> = ({ user, onRoleChangeClick }) => {
           </Text>
         </UserBlobHeaderTitle>
         <UserBlobHeaderSide className="relative">
-          <Button
-            small
-            secondary
-            id="options-menu"
-            aria-haspopup="true"
-            aria-expanded="true"
-            type="button"
-            onClick={() => {
-              setShowMenu((prev) => !prev);
-            }}
-          >
-            Zmień rolę
-          </Button>
+          {currentUser?.id !== user.id && (
+            <Button
+              small
+              secondary
+              id="options-menu"
+              aria-haspopup="true"
+              aria-expanded="true"
+              type="button"
+              onClick={() => {
+                setShowMenu((prev) => !prev);
+              }}
+            >
+              Zmień rolę
+            </Button>
+          )}
 
-          {showMenu && (
+          {showMenu ? (
             <div
               ref={menuRef}
               className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg z-30"
@@ -75,7 +87,7 @@ const UserBlob: React.FC<Props> = ({ user, onRoleChangeClick }) => {
                 </div>
               </div>
             </div>
-          )}
+          ) : null}
         </UserBlobHeaderSide>
       </UserBlobHeader>
     </UserBlobContainer>
