@@ -1,6 +1,7 @@
 import React from "react";
-import { Route, Redirect, RouteProps } from "react-router-dom";
+import { Route, RouteProps } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuth";
+import Unauthorized from "../../pages/Unauthorized";
 
 const UserRoute: React.FC<RouteProps> = ({
   component: Component,
@@ -12,9 +13,7 @@ any) => {
   return (
     <Route
       {...rest}
-      render={(props) =>
-        user ? <Component {...props} /> : <Redirect to="/unauthorized" />
-      }
+      render={(props) => (user ? <Component {...props} /> : <Unauthorized />)}
     />
   );
 };

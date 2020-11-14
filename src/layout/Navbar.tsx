@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink onClick={closeMenu} to="/">
+            <NavLink onClick={closeMenu} to="/bot">
               Steruj botem
             </NavLink>
           </li>
@@ -51,7 +51,6 @@ const Navbar: React.FC = () => {
       <NavLink to="/login">
         <Button
           onClick={() => {
-            console.log("clicked on ath button");
             if (user) {
               logout();
             }
