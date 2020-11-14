@@ -12,9 +12,9 @@ export interface HESchema {
   fsId: string;
   matchDetailsLink: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  goals: any;
+  goals: GoalSchema[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  goalsAtRoundsEnd: any;
+  goalsAtRoundsEnd: GoalSchema[];
 }
 
 export interface SESchema {
@@ -25,7 +25,7 @@ export interface SESchema {
   fsId: string;
   matchDetailsLink: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  historyEvents: any[];
+  historyEvents: HESchema[];
 }
 
 export interface ASchema {
