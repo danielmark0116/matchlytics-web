@@ -27,7 +27,7 @@ const AnalyticsProvider: React.FC = ({ children }) => {
 
       setMatchAnalysis(analysis ?? null);
     } catch (e) {
-      console.log();
+      console.log(e);
     }
   }, [accessToken]);
 
