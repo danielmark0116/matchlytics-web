@@ -26,7 +26,7 @@ const ScheduledMatchBlob: React.FC<Props> = ({
       <SubTitle>{title}</SubTitle>
       <Text small>{"Data: " + date}</Text>
       <a href={matchDetailsLink} target="_blank" rel="noopener noreferrer">
-        <Text align="center" small>
+        <Text align="left" small>
           <b className="text-teal-800">{`Link do meczu (${title})`}</b>
         </Text>
       </a>
