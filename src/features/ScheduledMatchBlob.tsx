@@ -15,7 +15,7 @@ interface Props {
 }
 
 const ScheduledMatchBlob: React.FC<Props> = ({
-  scheduledEvent: { title, date, historyEvents },
+  scheduledEvent: { title, date, historyEvents, matchDetailsLink },
 }) => {
   const [showMore, setShowMore] = useState(false);
 
@@ -25,6 +25,12 @@ const ScheduledMatchBlob: React.FC<Props> = ({
     <ScheduledMatchBlobContainer>
       <SubTitle>{title}</SubTitle>
       <Text small>{"Data: " + date}</Text>
+      <a href={matchDetailsLink} target="_blank" rel="noopener noreferrer">
+        <Text align="center" small>
+          <b className="text-teal-800">{`Link do meczu (${title})`}</b>
+        </Text>
+      </a>
+
       <Text small light>
         Rozegrano do tej pory:{" "}
         <HistoryQuantity quantity={historyEvents.length}>
