@@ -12,6 +12,8 @@ const Main: React.FC = () => {
   const { fetchLatestAnalysis, matchAnalysis } = useAnalyticsContext();
   const [textSearch, setTextSearch] = useState("");
 
+  const analysisStatus = matchAnalysis?.status === "pending" ? "TRWA" : "ZAKOŃCZONO";
+
   useEffect(() => {
     fetchLatestAnalysis();
   }, [fetchLatestAnalysis]);
@@ -61,6 +63,7 @@ const Main: React.FC = () => {
     <Container>
       <Subtitle>Najnowsza analiza</Subtitle>
       <Text light>{"Data: " + renderDate(matchAnalysis?.createdAt)}</Text>
+      <Text small>{`Status ${analysisStatus}`}</Text>
 
       <CustomInput
         className="my-4"

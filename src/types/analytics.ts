@@ -1,3 +1,5 @@
+export type AnalysisStatus = "pending" | "finished";
+
 export interface GoalSchema {
   minute: string;
   wasScored: boolean;
@@ -30,6 +32,7 @@ export interface SESchema {
 
 export interface ASchema {
   _id: string;
+  status: AnalysisStatus;
   createdAt: string;
   updatedAt: string;
   scheduledEvents: SESchema[];
