@@ -4,10 +4,11 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
     "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:react/recommended",
+    "standard",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -22,6 +23,7 @@ module.exports = {
     semi: ["error", "always"],
     quotes: ["error", "double"],
     "react/prop-types": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
   },
   settings: {
     react: {
@@ -32,4 +34,4 @@ module.exports = {
       flowVersion: "0.53",
     },
   },
-};
+}
