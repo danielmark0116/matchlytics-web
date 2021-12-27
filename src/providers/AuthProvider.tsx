@@ -43,14 +43,16 @@ const AuthProvider: React.FC = ({children}) => {
     } catch (e) {
       setUser(null)
       saveToLocalStorage(LocalStorageKeys.ACCESS_TOKEN, '')
-      return Promise.reject()
+      return Promise.reject(new Error('Failed to fetch user data'))
     }
+    // eslint-disable-next-line
   }, [])
 
   const logout = useCallback(() => {
     setAccessToken('')
     saveToLocalStorage(LocalStorageKeys.ACCESS_TOKEN, '')
     setUser(null)
+    // eslint-disable-next-line
   }, [])
 
   const isAdmin = useMemo(() => user?.role === UserRoles.ADMIN || user?.role === UserRoles.SUPER_ADMIN, [user])
@@ -78,8 +80,7 @@ const AuthProvider: React.FC = ({children}) => {
         user,
         getUser,
         logout,
-      }}
-    >
+      }}>
       {children}
     </AuthContext.Provider>
   )

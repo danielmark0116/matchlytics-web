@@ -10,6 +10,7 @@ const OAuthRedirect: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(() => {
+    // eslint-disable-next-line
     ;(async () => {
       try {
         const token = search.split('?token=')[1]
