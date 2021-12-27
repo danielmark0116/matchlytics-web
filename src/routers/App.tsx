@@ -1,15 +1,18 @@
-import React from "react";
-import Main from "../pages/Main";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import NotFound from "../pages/NotFound";
-import OAuthRedirect from "../pages/OAuthRedirect";
-import Login from "../pages/Login";
-import MemberRoute from "./utils/MemberRoute";
-import Unauthorized from "../pages/Unauthorized";
-import Layout from "../layout/Layout";
-import AdminRoute from "./utils/AdminRoute";
-import BotControl from "../pages/BotControl";
-import Users from "../pages/Users";
+/** @format */
+
+import React from 'react'
+import Main from '../pages/Main'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import NotFound from '../pages/NotFound'
+import OAuthRedirect from '../pages/OAuthRedirect'
+import Login from '../pages/Login'
+import MemberRoute from './utils/MemberRoute'
+import Unauthorized from '../pages/Unauthorized'
+import Layout from '../layout/Layout'
+import AdminRoute from './utils/AdminRoute'
+import BotControl from '../pages/BotControl'
+import Users from '../pages/Users'
+import FavouritesPage from '../pages/FavouritesPage'
 
 const App: React.FC = () => {
   return (
@@ -21,12 +24,13 @@ const App: React.FC = () => {
           <Route exact path="/login" component={Login} />
           <AdminRoute exact path="/bot" component={BotControl} />
           <AdminRoute exact path="/users" component={Users} />
+          <MemberRoute exact path="/favourites" component={FavouritesPage} />
           <Route exact path="/unauthorized" component={Unauthorized} />
           <Route component={NotFound} />
         </Switch>
       </Layout>
     </Router>
-  );
-};
+  )
+}
 
-export default App;
+export default App
