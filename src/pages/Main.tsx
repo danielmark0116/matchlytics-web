@@ -12,7 +12,8 @@ const Main: React.FC = () => {
   const { fetchLatestAnalysis, matchAnalysis } = useAnalyticsContext();
   const [textSearch, setTextSearch] = useState("");
 
-  const analysisStatus = matchAnalysis?.status === "pending" ? "TRWA" : "ZAKOŃCZONO";
+  const analysisStatus =
+    matchAnalysis?.status === "pending" ? "TRWA" : "ZAKOŃCZONO";
 
   useEffect(() => {
     fetchLatestAnalysis();
