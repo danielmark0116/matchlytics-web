@@ -1,12 +1,12 @@
-import { createContext } from "react";
-import { ASchema } from "../types/analytics";
+/** @format */
+
+import {createContext} from 'react'
+import {ASchema} from '../types/analytics'
 
 export interface AnalyticsContextData {
-  matchAnalysis: ASchema | null;
-  fetchLatestAnalysis: () => void;
-  triggerNewAnalysis: () => void;
+  matchAnalysis: ASchema | null
+  fetchLatestAnalysis: () => void
+  triggerNewAnalysis: () => void
 }
 
-export const AnalyticsContext = createContext<AnalyticsContextData | null>(
-  null
-);
+export const AnalyticsContext = createContext<AnalyticsContextData | null>(null)

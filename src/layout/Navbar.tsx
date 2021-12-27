@@ -1,34 +1,24 @@
-import Hamburger from "hamburger-react";
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { Button } from "../components/Button/Button.styled";
-import Logo from "../components/Logo/Logo";
-import { useAuthContext } from "../hooks/useAuth";
-import { Menu } from "./Menu.styled";
+/** @format */
+
+import Hamburger from 'hamburger-react'
+import React, {useState} from 'react'
+import {NavLink} from 'react-router-dom'
+import {Button} from '../components/Button/Button.styled'
+import Logo from '../components/Logo/Logo'
+import {useAuthContext} from '../hooks/useAuth'
+import {Menu} from './Menu.styled'
 
 const Navbar: React.FC = () => {
-  const { user, logout } = useAuthContext();
-  const [menu, setMenu] = useState(false);
+  const {user, logout} = useAuthContext()
+  const [menu, setMenu] = useState(false)
 
-  const closeMenu = () => setMenu(false);
+  const closeMenu = () => setMenu(false)
 
   return (
     <nav>
-      {user ? (
-        <Hamburger
-          size={28}
-          toggled={menu}
-          toggle={setMenu}
-          onToggle={() => null}
-        />
-      ) : null}
+      {user ? <Hamburger size={28} toggled={menu} toggle={setMenu} onToggle={() => null} /> : null}
       <Menu toggled={menu}>
-        <Hamburger
-          size={28}
-          toggled={menu}
-          toggle={setMenu}
-          onToggle={() => null}
-        />
+        <Hamburger size={28} toggled={menu} toggle={setMenu} onToggle={() => null} />
         <ul>
           <li>
             <NavLink onClick={closeMenu} to="/">
@@ -52,15 +42,15 @@ const Navbar: React.FC = () => {
         <Button
           onClick={() => {
             if (user) {
-              logout();
+              logout()
             }
           }}
         >
-          {user ? "Wyloguj" : "Zaloguj"}
+          {user ? 'Wyloguj' : 'Zaloguj'}
         </Button>
       </NavLink>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

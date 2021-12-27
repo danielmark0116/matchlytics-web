@@ -1,7 +1,9 @@
-import React from "react";
+/** @format */
+
+import React from 'react'
 
 const Unauthorized: React.FC = () => {
-  return <p>Unauthorized</p>;
-};
+  return <p>Unauthorized</p>
+}
 
-export default Unauthorized;
+export default Unauthorized

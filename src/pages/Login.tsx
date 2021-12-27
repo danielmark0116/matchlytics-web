@@ -1,12 +1,14 @@
-import React from "react";
-import { Redirect } from "react-router-dom";
-import StyledForm from "../components/AuthForm/AuthForm.styled";
-import Logo from "../components/Logo/Logo";
-import config from "../config";
-import { useAuthContext } from "../hooks/useAuth";
+/** @format */
+
+import React from 'react'
+import {Redirect} from 'react-router-dom'
+import StyledForm from '../components/AuthForm/AuthForm.styled'
+import Logo from '../components/Logo/Logo'
+import config from '../config'
+import {useAuthContext} from '../hooks/useAuth'
 
 const Login: React.FC = () => {
-  const { user } = useAuthContext();
+  const {user} = useAuthContext()
 
   return (
     <>
@@ -25,7 +27,7 @@ const Login: React.FC = () => {
         </form>
       </StyledForm>
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

@@ -1,8 +1,10 @@
-import styled from "styled-components";
-import tw from "twin.macro";
+/** @format */
+
+import styled from 'styled-components'
+import tw from 'twin.macro'
 
 const StyledForm = styled.section.attrs({
-  className: "flex flex-col justify-center items-center bg-gray-100",
+  className: 'flex flex-col justify-center items-center bg-gray-100',
 })`
   & {
     form {
@@ -18,6 +20,6 @@ const StyledForm = styled.section.attrs({
       ${tw`active:border-transparent focus:border-transparent visited:border-transparent`}
     }
   }
-`;
+`
 
-export default StyledForm;
+export default StyledForm

@@ -1,76 +1,75 @@
-import { useCallback, useEffect, useState } from "react";
-import { useAuthContext } from "../hooks/useAuth";
-import axios from "axios";
-import config from "../config";
-import { User, UserRoles } from "../types/user";
-import { updateToken } from "../utils/axios";
+/** @format */
+
+import {useCallback, useEffect, useState} from 'react'
+import {useAuthContext} from '../hooks/useAuth'
+import axios from 'axios'
+import config from '../config'
+import {User, UserRoles} from '../types/user'
+import {updateToken} from '../utils/axios'
 
 export interface UseUsersManagement {
-  fetchAllUsers: () => void;
-  users: User[];
-  updateRole: (newRole: UserRoles, userId: string) => void;
+  fetchAllUsers: () => void
+  users: User[]
+  updateRole: (newRole: UserRoles, userId: string) => void
 }
 
-const API = config.apiBase;
+const API = config.apiBase
 
 export const useUsersManagement = (): UseUsersManagement => {
-  const [users, setUsers] = useState<User[]>([]);
-  const { accessToken } = useAuthContext();
+  const [users, setUsers] = useState<User[]>([])
+  const {accessToken} = useAuthContext()
 
   const fetchAllUsers = useCallback(async () => {
     try {
       if (!accessToken) {
-        throw new Error("No token");
+        throw new Error('No token')
       }
 
-      updateToken(accessToken);
+      updateToken(accessToken)
 
-      const users: User[] = (await axios.get(API + "/api/users/all")).data
-        .users;
+      const users: User[] = (await axios.get(API + '/api/users/all')).data.users
 
-      setUsers(users);
+      setUsers(users)
     } catch (e) {
-      console.log(e);
-      setUsers([]);
+      console.log(e)
+      setUsers([])
     }
-  }, [accessToken]);
+  }, [accessToken])
 
   const updateRole = useCallback(
     async (newRole: UserRoles, userId: string) => {
       try {
         if (!accessToken) {
-          throw new Error("No token");
+          throw new Error('No token')
         }
 
-        updateToken(accessToken);
+        updateToken(accessToken)
 
-        const user: User = (
-          await axios.patch(API + "/api/users/" + userId + "/role/" + newRole)
-        ).data.user;
+        const user: User = (await axios.patch(API + '/api/users/' + userId + '/role/' + newRole)).data.user
 
         setUsers((users) =>
           users.map((e) => {
-            if (e.id === user?.id ?? "") {
-              return user;
+            if (e.id === user?.id ?? '') {
+              return user
             }
 
-            return e;
-          })
-        );
+            return e
+          }),
+        )
       } catch (e) {
-        console.log("Could not update user role");
+        console.log('Could not update user role')
       }
     },
-    [accessToken]
-  );
+    [accessToken],
+  )
 
   useEffect(() => {
-    fetchAllUsers();
-  }, [fetchAllUsers]);
+    fetchAllUsers()
+  }, [fetchAllUsers])
 
   return {
     fetchAllUsers,
     updateRole,
     users,
-  };
-};
+  }
+}
