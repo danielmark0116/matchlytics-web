@@ -26,6 +26,11 @@ const Navbar: React.FC = () => {
             </NavLink>
           </li>
           <li>
+            <NavLink onClick={closeMenu} to="/favourites">
+              Ulubione
+            </NavLink>
+          </li>
+          <li>
             <NavLink onClick={closeMenu} to="/bot">
               Steruj botem
             </NavLink>
@@ -44,8 +49,7 @@ const Navbar: React.FC = () => {
             if (user) {
               logout()
             }
-          }}
-        >
+          }}>
           {user ? 'Wyloguj' : 'Zaloguj'}
         </Button>
       </NavLink>

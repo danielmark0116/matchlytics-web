@@ -12,10 +12,10 @@ interface RoundDataProps {
   noIndicator?: boolean
 }
 
-export const ScheduledMatchBlobContainer = styled.div.attrs({
+export const ScheduledMatchBlobContainer = styled.div.attrs(() => ({
   className: 'rounded-xl bg-white p-4 mb-4 shadow-sm',
-})`
-  ${tw``}
+}))<{isFavourite?: boolean}>`
+  ${({isFavourite}) => isFavourite && tw`border-green-400 border-2`}
 `
 
 export const HistoryQuantity = styled.span<HistoryQProps>`

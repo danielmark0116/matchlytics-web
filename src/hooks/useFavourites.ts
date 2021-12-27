@@ -1,13 +1,17 @@
 /** @format */
 
-import {useCallback, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import axios from 'axios'
 import config from '../config'
+import {SESchema} from '../types/analytics'
+import {Favourite, FavouriteItem} from '../types/favourite'
 
 const API = config.apiBase
 
-export const useFavourites = () => {
-  const [favourites, setFavourites] = useState([])
+export const useFavourites = (config = {shouldAutoFetchFavourites: true}) => {
+  const {shouldAutoFetchFavourites} = config
+
+  const [favourites, setFavourites] = useState<Favourite[]>([])
 
   const fetchFavourites = useCallback(async () => {
     try {
@@ -23,9 +27,26 @@ export const useFavourites = () => {
     }
   }, [])
 
-  const addScheduledEventToFavourites = useCallback(() => {
-    //
+  const addScheduledEventToFavourites = useCallback(async (scheduledEvent: SESchema) => {
+    try {
+      const favouriteItem: FavouriteItem = {
+        data: scheduledEvent,
+        type: 'scheduledEvent',
+      }
+
+      await axios.post(API + '/api/favourites', {favouriteItem})
+
+      // display in-app?
+    } catch (e) {
+      //
+    }
   }, [])
+
+  useEffect(() => {
+    if (shouldAutoFetchFavourites) {
+      fetchFavourites()
+    }
+  }, [fetchFavourites, shouldAutoFetchFavourites])
 
   return {fetchFavourites, favourites, addScheduledEventToFavourites}
 }

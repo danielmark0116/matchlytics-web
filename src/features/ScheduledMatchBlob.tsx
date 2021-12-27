@@ -7,19 +7,31 @@ import Text from '../components/Typography/Text'
 import {ScheduledMatchBlobContainer, HistoryQuantity, ShowHistory} from '../components/ScheduledMatchBlob/ScheduledMatchBlob.styled'
 import {Button} from '../components/Button/Button.styled'
 import HistoryMatchBlob from './HistoryMatchBlob'
+import {useFavourites} from '../hooks/useFavourites'
 
 interface Props {
   scheduledEvent: SESchema
+  isFavourite?: boolean
 }
 
-const ScheduledMatchBlob: React.FC<Props> = ({scheduledEvent: {title, date, historyEvents, matchDetailsLink}}) => {
+const ScheduledMatchBlob: React.FC<Props> = ({scheduledEvent, isFavourite}) => {
+  const {title, date, historyEvents, matchDetailsLink} = scheduledEvent
   const [showMore, setShowMore] = useState(false)
+  const {addScheduledEventToFavourites} = useFavourites({shouldAutoFetchFavourites: false})
 
   const toggleShowMore = () => setShowMore((prev) => !prev)
 
   return (
-    <ScheduledMatchBlobContainer>
+    <ScheduledMatchBlobContainer isFavourite={isFavourite}>
       <SubTitle>{title}</SubTitle>
+      {isFavourite ? null : (
+        <p
+          onClick={() => {
+            addScheduledEventToFavourites(scheduledEvent)
+          }}>
+          Dodaj do ulubionych
+        </p>
+      )}
       <Text small>{'Data: ' + date}</Text>
       <a href={matchDetailsLink} target="_blank" rel="noopener noreferrer">
         <Text align="left" small>
