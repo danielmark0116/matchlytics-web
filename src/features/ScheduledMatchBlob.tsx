@@ -1,6 +1,7 @@
 /** @format */
 
 import React, {useState} from 'react'
+import {motion} from 'framer-motion'
 import {SESchema} from '../types/analytics'
 import SubTitle from '../components/Typography/Subtitle'
 import Text from '../components/Typography/Text'
@@ -12,9 +13,10 @@ import {useFavourites} from '../hooks/useFavourites'
 interface Props {
   scheduledEvent: SESchema
   isFavourite?: boolean
+  onDeleteButtonClick?: () => void
 }
 
-const ScheduledMatchBlob: React.FC<Props> = ({scheduledEvent, isFavourite}) => {
+const ScheduledMatchBlob: React.FC<Props> = ({scheduledEvent, isFavourite, onDeleteButtonClick}) => {
   const {title, date, historyEvents, matchDetailsLink} = scheduledEvent
   const [showMore, setShowMore] = useState(false)
   const {addScheduledEventToFavourites} = useFavourites({shouldAutoFetchFavourites: false})
@@ -23,15 +25,38 @@ const ScheduledMatchBlob: React.FC<Props> = ({scheduledEvent, isFavourite}) => {
 
   return (
     <ScheduledMatchBlobContainer isFavourite={isFavourite}>
-      <SubTitle>{title}</SubTitle>
-      {isFavourite ? null : (
-        <p
-          onClick={() => {
-            addScheduledEventToFavourites(scheduledEvent)
-          }}>
-          Dodaj do ulubionych
-        </p>
-      )}
+      <div className="header_row">
+        <div className="header_row__text_container">
+          <SubTitle>{title}</SubTitle>
+        </div>
+        <div className="header_row__icon_container">
+          {isFavourite ? null : (
+            <motion.i
+              whileHover={{
+                scale: 1.1,
+                transition: {duration: 0.2},
+              }}
+              whileTap={{scale: 0.9}}
+              className="ri-star-line icon_button"
+              onClick={() => {
+                addScheduledEventToFavourites(scheduledEvent)
+              }}></motion.i>
+          )}
+
+          {onDeleteButtonClick ? (
+            <motion.i
+              whileHover={{
+                scale: 1.1,
+                transition: {duration: 0.2},
+              }}
+              whileTap={{scale: 0.9}}
+              className="ri-delete-bin-4-fill icon_button icon_button__delete"
+              onClick={() => {
+                onDeleteButtonClick?.()
+              }}></motion.i>
+          ) : null}
+        </div>
+      </div>
       <Text small>{'Data: ' + date}</Text>
       <a href={matchDetailsLink} target="_blank" rel="noopener noreferrer">
         <Text align="left" small>

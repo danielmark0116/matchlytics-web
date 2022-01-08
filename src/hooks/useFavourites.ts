@@ -42,11 +42,24 @@ export const useFavourites = (config = {shouldAutoFetchFavourites: true}) => {
     }
   }, [])
 
+  const deleteScheduledEventFromFavourites = useCallback(
+    async (favouriteId: string) => {
+      try {
+        await axios.delete(API + `/api/favourites/${favouriteId}`)
+
+        fetchFavourites()
+      } catch (e) {
+        //
+      }
+    },
+    [fetchFavourites],
+  )
+
   useEffect(() => {
     if (shouldAutoFetchFavourites) {
       fetchFavourites()
     }
   }, [fetchFavourites, shouldAutoFetchFavourites])
 
-  return {fetchFavourites, favourites, addScheduledEventToFavourites}
+  return {fetchFavourites, favourites, addScheduledEventToFavourites, deleteScheduledEventFromFavourites}
 }

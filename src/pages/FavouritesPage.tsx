@@ -1,14 +1,16 @@
 /** @format */
 
 import React from 'react'
+import {AnimatePresence} from 'framer-motion'
 import {Container} from '../components/Container/Container.styled'
 import SubTitle from '../components/Typography/Subtitle'
 import Text from '../components/Typography/Text'
 import ScheduledMatchBlob from '../features/ScheduledMatchBlob'
 import {useFavourites} from '../hooks/useFavourites'
+import AnimatePresenceWrapper from '../components/AnimatePresenceWrapper/AnimatePresenceWrapper'
 
 const FavouritesPage = () => {
-  const {favourites} = useFavourites()
+  const {favourites, deleteScheduledEventFromFavourites} = useFavourites()
 
   return (
     <Container>
@@ -17,13 +19,25 @@ const FavouritesPage = () => {
 
       <br />
 
-      {favourites.map((f) => {
-        if (f.favouriteItem.type === 'scheduledEvent') {
-          return <ScheduledMatchBlob isFavourite scheduledEvent={f.favouriteItem.data} />
-        }
+      <AnimatePresence>
+        {favourites.map((f) => {
+          if (f.favouriteItem.type === 'scheduledEvent') {
+            return (
+              <AnimatePresenceWrapper>
+                <ScheduledMatchBlob
+                  onDeleteButtonClick={() => {
+                    deleteScheduledEventFromFavourites(f.id)
+                  }}
+                  isFavourite
+                  scheduledEvent={f.favouriteItem.data}
+                />
+              </AnimatePresenceWrapper>
+            )
+          }
 
-        return null
-      })}
+          return null
+        })}
+      </AnimatePresence>
     </Container>
   )
 }

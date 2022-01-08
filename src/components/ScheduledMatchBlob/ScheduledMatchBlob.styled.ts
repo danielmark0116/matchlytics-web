@@ -12,10 +12,44 @@ interface RoundDataProps {
   noIndicator?: boolean
 }
 
-export const ScheduledMatchBlobContainer = styled.div.attrs(() => ({
-  className: 'rounded-xl bg-white p-4 mb-4 shadow-sm',
+export const ScheduledMatchBlobContainer = styled.div.attrs(({className}) => ({
+  className: 'rounded-xl bg-white p-4 shadow-sm ' + className || '',
 }))<{isFavourite?: boolean}>`
   ${({isFavourite}) => isFavourite && tw`border-green-400 border-2`}
+
+  .header_row {
+    display: flex;
+    flex-direction: row;
+
+    &__text_container {
+      flex: 1;
+    }
+
+    &__icon_container {
+      display: flex;
+      width: 40px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+  }
+
+  i {
+    width: 20px;
+    padding: 0 8px;
+    margin-right: 12px;
+
+    &.icon_button {
+      ${tw`text-green-800`}
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &__delete {
+        ${tw`text-red-500`}
+      }
+    }
+  }
 `
 
 export const HistoryQuantity = styled.span<HistoryQProps>`

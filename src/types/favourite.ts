@@ -14,7 +14,8 @@ interface FavouriteUser {
 
 export type FavouriteItem = FavouriteScheduledEvent | FavouriteUser
 
-export interface Favourite extends Document {
+export interface Favourite {
   userId: string
   favouriteItem: FavouriteItem
+  id: string
 }
