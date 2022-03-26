@@ -13,8 +13,10 @@ interface Props {
 }
 
 const HistoryMatchBlob: React.FC<Props> = ({
-  event: { title, date, matchDetailsLink, goals, goalsAtRoundsEnd },
+  event: { title, date, matchDetailsLink, goals, ...rest },
 }) => {
+  const goalsAtRoundsEnd = rest?.goalsAtRoundsEnd || [];
+
   const sumGoalsForEachHalf = (
     goals: GoalSchema[]
   ): { firstHalf: number; secondHalf: number } => {
@@ -25,13 +27,13 @@ const HistoryMatchBlob: React.FC<Props> = ({
         if (time < 50) {
           return {
             ...acc,
-            firstHalf: acc.firstHalf += 1,
+            firstHalf: (acc.firstHalf += 1),
           };
         }
 
         return {
           ...acc,
-          secondHalf: acc.secondHalf += 1,
+          secondHalf: (acc.secondHalf += 1),
         };
       },
       { firstHalf: 0, secondHalf: 0 }
