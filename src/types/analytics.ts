@@ -1,5 +1,7 @@
 /** @format */
 
+import {Favourite} from './favourite'
+
 export type AnalysisStatus = 'pending' | 'finished'
 
 export interface GoalSchema {
@@ -30,6 +32,7 @@ export interface SESchema {
   matchDetailsLink: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   historyEvents: HESchema[]
+  favourite?: Favourite
 }
 
 export interface ASchema {

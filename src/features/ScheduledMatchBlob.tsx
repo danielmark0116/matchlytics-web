@@ -17,6 +17,7 @@ interface Props {
 }
 
 const ScheduledMatchBlob: React.FC<Props> = ({scheduledEvent, isFavourite, onDeleteButtonClick}) => {
+  const [fav, setIsFav] = useState(isFavourite)
   const {title, date, historyEvents, matchDetailsLink} = scheduledEvent
   const [showMore, setShowMore] = useState(false)
   const {addScheduledEventToFavourites} = useFavourites({shouldAutoFetchFavourites: false})
@@ -24,13 +25,13 @@ const ScheduledMatchBlob: React.FC<Props> = ({scheduledEvent, isFavourite, onDel
   const toggleShowMore = () => setShowMore((prev) => !prev)
 
   return (
-    <ScheduledMatchBlobContainer isFavourite={isFavourite}>
+    <ScheduledMatchBlobContainer isFavourite={fav}>
       <div className="header_row">
         <div className="header_row__text_container">
           <SubTitle>{title}</SubTitle>
         </div>
         <div className="header_row__icon_container">
-          {isFavourite ? null : (
+          {fav ? null : (
             <motion.i
               whileHover={{
                 scale: 1.1,
@@ -40,6 +41,7 @@ const ScheduledMatchBlob: React.FC<Props> = ({scheduledEvent, isFavourite, onDel
               className="ri-star-line icon_button"
               onClick={() => {
                 addScheduledEventToFavourites(scheduledEvent)
+                setIsFav(true)
               }}></motion.i>
           )}
 

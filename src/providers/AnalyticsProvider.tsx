@@ -48,6 +48,22 @@ const AnalyticsProvider: React.FC = ({children}) => {
     }
   }, [accessToken])
 
+  const stopScrapping = useCallback(async () => {
+    try {
+      if (!accessToken) {
+        throw new Error('No accessToken to fetch analysis')
+      }
+
+      updateToken(accessToken)
+
+      const stopped: boolean = (await axios.get(API + '/api/scrapper/stop'))?.data?.success ?? false
+
+      console.log('Analysis stopped: ', stopped)
+    } catch (e) {
+      console.log(e)
+    }
+  }, [accessToken])
+
   useEffect(() => {
     console.log(matchAnalysis)
   }, [matchAnalysis])
@@ -58,8 +74,8 @@ const AnalyticsProvider: React.FC = ({children}) => {
         fetchLatestAnalysis,
         triggerNewAnalysis,
         matchAnalysis,
-      }}
-    >
+        stopScrapping,
+      }}>
       {children}
     </AnalyticsContext.Provider>
   )

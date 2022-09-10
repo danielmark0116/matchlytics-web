@@ -7,6 +7,7 @@ export interface AnalyticsContextData {
   matchAnalysis: ASchema | null
   fetchLatestAnalysis: () => void
   triggerNewAnalysis: () => void
+  stopScrapping: () => void
 }
 
 export const AnalyticsContext = createContext<AnalyticsContextData | null>(null)

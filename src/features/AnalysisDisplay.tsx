@@ -16,7 +16,7 @@ const AnalysisDisplay: React.FC<Props> = ({scheduledEvents}) => {
       <div className="flex flex-col mt-8">
         {scheduledEvents.map((scheduledEvent, index) => (
           <AnimatePresenceWrapper key={scheduledEvent.fsId}>
-            <ScheduledMatchBlob key={scheduledEvent.title + index} {...{scheduledEvent}} />
+            <ScheduledMatchBlob key={scheduledEvent.title + index} {...{scheduledEvent, isFavourite: !!scheduledEvent?.favourite}} />
           </AnimatePresenceWrapper>
         ))}
       </div>
