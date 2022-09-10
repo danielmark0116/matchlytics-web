@@ -37,7 +37,7 @@ const Main: React.FC = () => {
     }
 
     const anyLateCheck = (historyEvents: HESchema[]): boolean => {
-      return historyEvents.some((e) => !!e.goalsAtRoundsEnd.length)
+      return historyEvents.some((e) => !!e?.goalsAtRoundsEnd?.length)
     }
 
     const events = matchAnalysis?.scheduledEvents ?? []
