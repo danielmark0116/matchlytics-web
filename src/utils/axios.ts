@@ -1,5 +1,8 @@
-import axios from "axios";
+/** @format */
+
+import axios from 'axios'
 
 export const updateToken = (token: string): void => {
-  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-};
+  // eslint-disable-next-line
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+}

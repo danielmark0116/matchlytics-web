@@ -1,32 +1,30 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import AuthContext from "../contexts/AuthContext";
-import { User, UserRoles } from "../types/user";
-import config from "../config";
-import axios from "axios";
-import { LocalStorageKeys, useLocalStorage } from "../hooks/useLocalStorage";
-import { updateToken } from "../utils/axios";
+/** @format */
 
-const API = config.apiBase;
+import React, {useCallback, useEffect, useMemo, useState} from 'react'
+import AuthContext from '../contexts/AuthContext'
+import {User, UserRoles} from '../types/user'
+import config from '../config'
+import axios from 'axios'
+import {LocalStorageKeys, useLocalStorage} from '../hooks/useLocalStorage'
+import {updateToken} from '../utils/axios'
 
-type UserWithHash = User & { password_hash?: string };
+const API = config.apiBase
 
-const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<null | User>(null);
-  const [accessToken, setAccessToken] = useState<string>("");
-  const {
-    setItem: saveToLocalStorage,
-    getItem: getFromLocalStorage,
-  } = useLocalStorage();
+type UserWithHash = User & {password_hash?: string}
+
+const AuthProvider: React.FC = ({children}) => {
+  const [user, setUser] = useState<null | User>(null)
+  const [accessToken, setAccessToken] = useState<string>('')
+  const {setItem: saveToLocalStorage, getItem: getFromLocalStorage} = useLocalStorage()
 
   const getUser = useCallback(async (accessToken: string): Promise<User> => {
     try {
-      updateToken(accessToken);
+      updateToken(accessToken)
 
-      const user: UserWithHash =
-        (await axios.get(API + "/api/users")).data?.user ?? null;
+      const user: UserWithHash = (await axios.get(API + '/api/users')).data?.user ?? null
 
       if (!user) {
-        throw new Error("No user");
+        throw new Error('No user')
       }
 
       setUser({
@@ -35,47 +33,40 @@ const AuthProvider: React.FC = ({ children }) => {
         id: user.id,
         name: user.name,
         role: user.role,
-      });
+      })
 
-      delete user.password_hash;
+      delete user.password_hash
 
-      setAccessToken(accessToken);
-      saveToLocalStorage(LocalStorageKeys.ACCESS_TOKEN, accessToken);
-      return Promise.resolve(user);
+      setAccessToken(accessToken)
+      saveToLocalStorage(LocalStorageKeys.ACCESS_TOKEN, accessToken)
+      return Promise.resolve(user)
     } catch (e) {
-      setUser(null);
-      saveToLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
-      return Promise.reject();
+      setUser(null)
+      saveToLocalStorage(LocalStorageKeys.ACCESS_TOKEN, '')
+      return Promise.reject(new Error('Failed to fetch user data'))
     }
-  }, []);
+    // eslint-disable-next-line
+  }, [])
 
   const logout = useCallback(() => {
-    setAccessToken("");
-    saveToLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
-    setUser(null);
-  }, []);
+    setAccessToken('')
+    saveToLocalStorage(LocalStorageKeys.ACCESS_TOKEN, '')
+    setUser(null)
+    // eslint-disable-next-line
+  }, [])
 
-  const isAdmin = useMemo(
-    () =>
-      user?.role === UserRoles.ADMIN || user?.role === UserRoles.SUPER_ADMIN,
-    [user]
-  );
-  const isSuperAdmin = useMemo(() => user?.role === UserRoles.SUPER_ADMIN, [
-    user,
-  ]);
-  const isMember = useMemo(
-    () => user?.role === UserRoles.MEMBER || isSuperAdmin || isAdmin,
-    [user, isSuperAdmin, isAdmin]
-  );
+  const isAdmin = useMemo(() => user?.role === UserRoles.ADMIN || user?.role === UserRoles.SUPER_ADMIN, [user])
+  const isSuperAdmin = useMemo(() => user?.role === UserRoles.SUPER_ADMIN, [user])
+  const isMember = useMemo(() => user?.role === UserRoles.MEMBER || isSuperAdmin || isAdmin, [user, isSuperAdmin, isAdmin])
 
   useEffect(() => {
-    const tokenFromStorage = getFromLocalStorage(LocalStorageKeys.ACCESS_TOKEN);
-    const token = typeof tokenFromStorage === "string" ? tokenFromStorage : "";
+    const tokenFromStorage = getFromLocalStorage(LocalStorageKeys.ACCESS_TOKEN)
+    const token = typeof tokenFromStorage === 'string' ? tokenFromStorage : ''
 
     if (token) {
-      getUser(typeof token === "string" ? token : "");
+      getUser(typeof token === 'string' ? token : '')
     }
-  }, [getFromLocalStorage, getUser]);
+  }, [getFromLocalStorage, getUser])
 
   return (
     <AuthContext.Provider
@@ -89,11 +80,10 @@ const AuthProvider: React.FC = ({ children }) => {
         user,
         getUser,
         logout,
-      }}
-    >
+      }}>
       {children}
     </AuthContext.Provider>
-  );
-};
+  )
+}
 
-export default AuthProvider;
+export default AuthProvider

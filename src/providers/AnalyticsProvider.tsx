@@ -1,56 +1,56 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { AnalyticsContext } from "../contexts/AnalyticsContext";
-import { useAuthContext } from "../hooks/useAuth";
-import { ASchema } from "../types/analytics";
-import { updateToken } from "../utils/axios";
-import config from "../config";
-import axios from "axios";
+/** @format */
 
-const API = config.apiBase;
+import React, {useCallback, useEffect, useState} from 'react'
+import {AnalyticsContext} from '../contexts/AnalyticsContext'
+import {useAuthContext} from '../hooks/useAuth'
+import {ASchema} from '../types/analytics'
+import {updateToken} from '../utils/axios'
+import config from '../config'
+import axios from 'axios'
 
-const AnalyticsProvider: React.FC = ({ children }) => {
-  const [matchAnalysis, setMatchAnalysis] = useState<ASchema | null>(null);
-  const { accessToken } = useAuthContext();
+const API = config.apiBase
+
+const AnalyticsProvider: React.FC = ({children}) => {
+  const [matchAnalysis, setMatchAnalysis] = useState<ASchema | null>(null)
+  const {accessToken} = useAuthContext()
 
   const fetchLatestAnalysis = useCallback(async () => {
     try {
       if (!accessToken) {
-        throw new Error("No accessToken to fetch analysis");
+        throw new Error('No accessToken to fetch analysis')
       }
 
-      updateToken(accessToken);
+      updateToken(accessToken)
 
-      const analysis: ASchema = (await axios.get(API + "/api/scrapper")).data
-        .data[0];
+      const analysis: ASchema = (await axios.get(API + '/api/scrapper')).data.data[0]
 
-      console.log("Fetched");
+      console.log('Fetched')
 
-      setMatchAnalysis(analysis ?? null);
+      setMatchAnalysis(analysis ?? null)
     } catch (e) {
-      console.log(e);
+      console.log(e)
     }
-  }, [accessToken]);
+  }, [accessToken])
 
   const triggerNewAnalysis = useCallback(async () => {
     try {
       if (!accessToken) {
-        throw new Error("No accessToken to fetch analysis");
+        throw new Error('No accessToken to fetch analysis')
       }
 
-      updateToken(accessToken);
+      updateToken(accessToken)
 
-      const started: boolean =
-        (await axios.post(API + "/api/scrapper"))?.data?.success ?? false;
+      const started: boolean = (await axios.post(API + '/api/scrapper'))?.data?.success ?? false
 
-      console.log("Analysis started: ", started);
+      console.log('Analysis started: ', started)
     } catch (e) {
-      console.log(e);
+      console.log(e)
     }
-  }, [accessToken]);
+  }, [accessToken])
 
   useEffect(() => {
-    console.log(matchAnalysis);
-  }, [matchAnalysis]);
+    console.log(matchAnalysis)
+  }, [matchAnalysis])
 
   return (
     <AnalyticsContext.Provider
@@ -62,7 +62,7 @@ const AnalyticsProvider: React.FC = ({ children }) => {
     >
       {children}
     </AnalyticsContext.Provider>
-  );
-};
+  )
+}
 
-export default AnalyticsProvider;
+export default AnalyticsProvider

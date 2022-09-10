@@ -1,39 +1,41 @@
-export type AnalysisStatus = "pending" | "finished";
+/** @format */
+
+export type AnalysisStatus = 'pending' | 'finished'
 
 export interface GoalSchema {
-  minute: string;
-  wasScored: boolean;
-  who: string;
+  minute: string
+  wasScored: boolean
+  who: string
 }
 
 export interface HESchema {
-  title: string;
-  date: string;
-  team1: string;
-  team2: string;
-  fsId: string;
-  matchDetailsLink: string;
+  title: string
+  date: string
+  team1: string
+  team2: string
+  fsId: string
+  matchDetailsLink: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  goals: GoalSchema[];
+  goals: GoalSchema[]
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  goalsAtRoundsEnd: GoalSchema[];
+  goalsAtRoundsEnd: GoalSchema[]
 }
 
 export interface SESchema {
-  title: string;
-  date: string;
-  team1: string;
-  team2: string;
-  fsId: string;
-  matchDetailsLink: string;
+  title: string
+  date: string
+  team1: string
+  team2: string
+  fsId: string
+  matchDetailsLink: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  historyEvents: HESchema[];
+  historyEvents: HESchema[]
 }
 
 export interface ASchema {
-  _id: string;
-  status: AnalysisStatus;
-  createdAt: string;
-  updatedAt: string;
-  scheduledEvents: SESchema[];
+  _id: string
+  status: AnalysisStatus
+  createdAt: string
+  updatedAt: string
+  scheduledEvents: SESchema[]
 }

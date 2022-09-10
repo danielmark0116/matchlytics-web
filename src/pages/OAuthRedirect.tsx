@@ -1,27 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { Redirect, useLocation } from "react-router-dom";
-import { useAuthContext } from "../hooks/useAuth";
+/** @format */
+
+import React, {useEffect, useState} from 'react'
+import {Redirect, useLocation} from 'react-router-dom'
+import {useAuthContext} from '../hooks/useAuth'
 
 const OAuthRedirect: React.FC = () => {
-  const { search } = useLocation();
-  const { getUser } = useAuthContext();
-  const [loggedIn, setLoggedIn] = useState(false);
+  const {search} = useLocation()
+  const {getUser} = useAuthContext()
+  const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(() => {
-    (async () => {
+    // eslint-disable-next-line
+    ;(async () => {
       try {
-        const token = search.split("?token=")[1];
-        const user = await getUser(token);
+        const token = search.split('?token=')[1]
+        const user = await getUser(token)
         if (user) {
-          setLoggedIn(true);
+          setLoggedIn(true)
         }
       } catch (e) {
-        setLoggedIn(false);
+        setLoggedIn(false)
       }
-    })();
-  }, [search, getUser]);
+    })()
+  }, [search, getUser])
 
-  return <>{loggedIn && <Redirect to="/" />}</>;
-};
+  return <>{loggedIn && <Redirect to="/" />}</>
+}
 
-export default OAuthRedirect;
+export default OAuthRedirect

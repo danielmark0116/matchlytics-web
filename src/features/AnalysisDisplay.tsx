@@ -1,22 +1,27 @@
-import React from "react";
-import ScheduledMatchBlob from "./ScheduledMatchBlob";
-import { SESchema } from "../types/analytics";
+/** @format */
+
+import React from 'react'
+import {AnimatePresence} from 'framer-motion'
+import ScheduledMatchBlob from './ScheduledMatchBlob'
+import {SESchema} from '../types/analytics'
+import AnimatePresenceWrapper from '../components/AnimatePresenceWrapper/AnimatePresenceWrapper'
 
 interface Props {
-  scheduledEvents: SESchema[];
+  scheduledEvents: SESchema[]
 }
 
-const AnalysisDisplay: React.FC<Props> = ({ scheduledEvents }) => {
+const AnalysisDisplay: React.FC<Props> = ({scheduledEvents}) => {
   return (
-    <div className="flex flex-col mt-8">
-      {scheduledEvents.map((scheduledEvent, index) => (
-        <ScheduledMatchBlob
-          key={scheduledEvent.title + index}
-          {...{ scheduledEvent }}
-        />
-      ))}
-    </div>
-  );
-};
+    <AnimatePresence>
+      <div className="flex flex-col mt-8">
+        {scheduledEvents.map((scheduledEvent, index) => (
+          <AnimatePresenceWrapper key={scheduledEvent.fsId}>
+            <ScheduledMatchBlob key={scheduledEvent.title + index} {...{scheduledEvent}} />
+          </AnimatePresenceWrapper>
+        ))}
+      </div>
+    </AnimatePresence>
+  )
+}
 
-export default AnalysisDisplay;
+export default AnalysisDisplay

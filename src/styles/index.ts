@@ -1,1 +1,3 @@
-export const test = "";
+/** @format */
+
+export const test = ''
